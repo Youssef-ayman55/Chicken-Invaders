@@ -8,6 +8,7 @@ class player : public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
 private:
+    bool gameover;
     int scorevalue;
     QGraphicsTextItem * score;
 public:

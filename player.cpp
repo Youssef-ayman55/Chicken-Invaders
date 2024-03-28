@@ -1,7 +1,13 @@
-#include "player.h"
+#include "laser.h"
+#include "enemy.h"
+
 #include <QKeyEvent>
 #include <QGraphicsScene>
-#include "enemy.h"
+#include "player.h"
+
+
+
+
 player::player(QGraphicsTextItem * score): score(score)
 {
     if(score == 0){
@@ -19,8 +25,14 @@ void player::keyPressEvent(QKeyEvent* event){
     else if(event->key() == Qt::Key_Right){
         if(x() < 1100) setPos(x() + 10, 700);
     }
+    if(event->key() == Qt::Key_Space){
+        Laser * bullet = new Laser();
+        bullet->setPos(x() + pixmap().width()/2 - bullet->pixmap().width()/2, y());
+        scene()->addItem(bullet);
+    }
 }
 void player::createEnemy()
 {   Enemy * enemy = new Enemy();
     scene()->addItem(enemy);
 }
+

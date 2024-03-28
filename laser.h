@@ -1,13 +1,13 @@
-#ifndef ENEMY_H
-#define ENEMY_H
+#ifndef LASER_H
+#define LASER_H
 
 #include <QGraphicsRectItem>
 #include <QObject>
 #include <QGraphicsPixmapItem>
-class Enemy: public QObject, public QGraphicsPixmapItem{
+class Laser: public QObject, public QGraphicsPixmapItem{
     Q_OBJECT
 public:
-    Enemy();
+    Laser();
 
 public slots:
     void move();

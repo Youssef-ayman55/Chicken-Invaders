@@ -10,6 +10,7 @@ CONFIG += c++17
 
 SOURCES += \
     enemy.cpp \
+    laser.cpp \
     main.cpp \
     mainwindow.cpp \
     player.cpp
@@ -17,6 +18,7 @@ SOURCES += \
 HEADERS += \
     enemy.h \
     global.h \
+    laser.h \
     mainwindow.h \
     player.h
 
