@@ -14,6 +14,7 @@ public:
     player(QGraphicsTextItem *score = 0);
 public slots:
     void keyPressEvent(QKeyEvent * event);
+    void createEnemy();
 };
 
 #endif // PLAYER_H

@@ -5,6 +5,7 @@
 #include <QGraphicsPixmapItem>
 #include <QPixmap>
 #include <QApplication>
+#include <QTimer>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -36,5 +37,8 @@ void MainWindow::on_new_game_clicked()
     plane->setFlag(QGraphicsItem::ItemIsFocusable);
     plane->setFocus();
     view->show();
+    QTimer * time = new QTimer();
+    QObject::connect(time, SIGNAL(timeout()),plane,SLOT(createEnemy()));
+    time->start(2000);
 }
 

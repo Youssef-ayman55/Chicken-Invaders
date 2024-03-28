@@ -1,5 +1,7 @@
 #include "player.h"
 #include <QKeyEvent>
+#include <QGraphicsScene>
+#include "enemy.h"
 player::player(QGraphicsTextItem * score): score(score)
 {
     if(score == 0){
@@ -17,4 +19,8 @@ void player::keyPressEvent(QKeyEvent* event){
     else if(event->key() == Qt::Key_Right){
         if(x() < 1100) setPos(x() + 10, 700);
     }
+}
+void player::createEnemy()
+{   Enemy * enemy = new Enemy();
+    scene()->addItem(enemy);
 }
