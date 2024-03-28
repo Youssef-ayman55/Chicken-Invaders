@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
     w->show();
     QGraphicsView * view = new QGraphicsView;
     QGraphicsScene * scene = new QGraphicsScene;
-    QPixmap * player_image = new QPixmap("C:/Users/youss/Downloads/Chicken_Invaders/Chicken-Invaders/resources/player.png");
+    QPixmap * player_image = new QPixmap(":/images/resources/player.png");
     player * plane = new player;
     view->setFixedSize(1200,800);
     scene->setSceneRect(0,0,1200,800);
