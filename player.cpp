@@ -18,6 +18,3 @@ void player::keyPressEvent(QKeyEvent* event){
         if(x() < 1100) setPos(x() + 10, 700);
     }
 }
-void player::setmain(MainWindow * wptr){
-    w = wptr;
-}

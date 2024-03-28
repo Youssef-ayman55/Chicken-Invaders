@@ -17,12 +17,24 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
-void MainWindow::setview(QGraphicsView * viewptr){
-    view = viewptr;
-}
+
 void MainWindow::on_new_game_clicked()
 {
     hide();
+    view = new QGraphicsView;
+    scene = new QGraphicsScene;
+    player_image = new QPixmap(":/images/resources/player.png");
+    plane = new player;
+    view->setFixedSize(1200,800);
+    scene->setSceneRect(0,0,1200,800);
+    view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    view->setScene(scene);
+    plane->setPixmap(*player_image);
+    scene->addItem(plane);
+    plane->setPos(550,700);
+    plane->setFlag(QGraphicsItem::ItemIsFocusable);
+    plane->setFocus();
     view->show();
 }
 

@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QGraphicsScene>
 #include <QGraphicsView>
+#include "player.h"
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -25,5 +26,8 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QGraphicsView * view;
+    QGraphicsScene * scene;
+    QPixmap * player_image;
+    player * plane;
 };
 #endif // MAINWINDOW_H
