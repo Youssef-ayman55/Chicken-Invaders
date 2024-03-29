@@ -26,6 +26,7 @@ void Enemy:: move()
     if(y()+pixmap().height()>800)
     {
         scene()->removeItem(this);
+        ptr_player->decreaseHealth();
         delete this;
     }
 }

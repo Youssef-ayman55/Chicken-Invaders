@@ -1,4 +1,5 @@
 QT       += core gui
+QT       += multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -10,6 +11,7 @@ CONFIG += c++17
 
 SOURCES += \
     enemy.cpp \
+    gameover.cpp \
     laser.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -17,12 +19,14 @@ SOURCES += \
 
 HEADERS += \
     enemy.h \
+    gameover.h \
     global.h \
     laser.h \
     mainwindow.h \
     player.h
 
 FORMS += \
+    gameover.ui \
     mainwindow.ui
 
 # Default rules for deployment.
@@ -31,4 +35,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
-    resources.qrc
+    resources.qrc \
+    Sound.qrc

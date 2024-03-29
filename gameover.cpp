@@ -1,5 +1,5 @@
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
+#include "gameover.h"
+#include "ui_gameover.h"
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QGraphicsPixmapItem>
@@ -10,20 +10,20 @@
 #include <QGraphicsTextItem>
 #include <QColor>
 
-
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+GameOver::GameOver(QWidget *parent, QString x)
+    : QDialog(parent)
+    , ui(new Ui::GameOver)
 {
     ui->setupUi(this);
+    ui->ScoreText->setText(x);
 }
 
-MainWindow::~MainWindow()
+GameOver::~GameOver()
 {
     delete ui;
 }
 
-void MainWindow::on_new_game_clicked()
+void GameOver::on_TryAgain_clicked()
 {
     hide();
     view = new QGraphicsView;

@@ -5,18 +5,20 @@
 #include <QGraphicsPixmapItem>
 #include <QGraphicsTextItem>
 #include <QWidget>
+#include <QGraphicsTextItem>
 class player : public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
 private:
     bool gameover;
-    int scorevalue;
     int health = 3;
-    QGraphicsTextItem * score;
     QWidget * w;
     QGraphicsView * view;
 public:
+
     player(QWidget *w, QGraphicsView* view);
+    QGraphicsTextItem * score;
+    int scorevalue = 0;
     void decreaseHealth();
     int getHealth();
 public slots:

@@ -5,14 +5,18 @@
 #include <QGraphicsScene>
 #include <QTimer>
 #include "player.h"
+#include <QMediaPlayer>
+#include <QAudioOutput>
+#include "gameover.h"
+
+
 
 
 
 player::player(QWidget * w, QGraphicsView * view): w(w), view(view)
 {
-        scorevalue = 0;
-        score = new QGraphicsTextItem;
-        score->setPlainText("Score: " + QString::number(scorevalue));
+    score = new QGraphicsTextItem;
+    score->setPlainText("Score: " + QString::number(scorevalue));
     setPos(550, 700);
     score->setPos(0,0);
 
@@ -23,25 +27,45 @@ player::player(QWidget * w, QGraphicsView * view): w(w), view(view)
 }
 void player::keyPressEvent(QKeyEvent* event){
     if(event->key() == Qt::Key_Left){
-        if(x() > 0) setPos(x() - 10 , 700);
+        if(x() > 0) setPos(x() - 10 , y());
     }
     else if(event->key() == Qt::Key_Right){
-        if(x() < 1100) setPos(x() + 10, 700);
+        if(x() < 1100) setPos(x() + 10, y());
     }
+    if(event->key() == Qt::Key_Up){
+        if(x() > 0) setPos(x(), y()-10);
+    }
+    else if(event->key() == Qt::Key_Down){
+        if(x() < 1100) setPos(x(), y()+10);
+    }
+
     if(event->key() == Qt::Key_Space){
         Laser * bullet = new Laser();
+        bullet->ptr_player = this;
         bullet->setPos(x() + pixmap().width()/2 - bullet->pixmap().width()/2, y());
         scene()->addItem(bullet);
+        //Sound
+
+        QAudioOutput* bulletoutput = new QAudioOutput();
+        bulletoutput->setVolume(50);
+        QMediaPlayer* bulletsound = new QMediaPlayer();
+        bulletsound->setAudioOutput(bulletoutput);
+        bulletsound->setSource(QUrl("qrc:/sound/resources/laser.mp3"));
+        bulletsound->play();
+        //End sound
     }
 }
 void player::createEnemy()
 {   Enemy * enemy = new Enemy();
+    enemy->ptr_player = this;
     scene()->addItem(enemy);
 }
 
 void player::decreaseHealth(){
-    if(health > 0)
+    if(health > 0){
         health--;
+        score->setPlainText("Health: " + QString::number(health));
+    }
 }
 
 int player::getHealth(){return health;}
@@ -51,18 +75,29 @@ void player::systemUpdater(){
     for(int i=0, n=colliding_items.size(); i<n; ++i){
         if(typeid(*(colliding_items[i]))==typeid(Enemy)){
             scene()->removeItem(colliding_items[i]);
+            decreaseHealth();
             if(health == 0){
-                w->show();
+                GameOver* gameover = new GameOver(NULL, QString::number(scorevalue));
+                gameover->show();
                 delete view;
+                delete w;
                 delete this;
+                return;
             }
 
             delete colliding_items[i];
 
-            decreaseHealth();
+
             return;
         }
     }
-
+    if(health == 0){
+        GameOver* gameover = new GameOver(NULL, QString::number(scorevalue));
+        gameover->show();
+        delete view;
+        delete w;
+        delete this;
+        return;
+    }
 }
 

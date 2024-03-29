@@ -3,6 +3,8 @@
 #include <QPixmap>
 #include <QGraphicsPixmapItem>
 #include <QTimer>
+#include <QMediaPlayer>
+#include <QAudioOutput>
 #include "enemy.h"
 
 
@@ -25,7 +27,16 @@ void Laser:: move()
             scene()->removeItem(this);
             delete colliding_items[i];
             delete this;
-            //Increase Score?
+            //Sound
+            QAudioOutput* bulletoutput = new QAudioOutput();
+            bulletoutput->setVolume(50);
+            QMediaPlayer* bulletsound = new QMediaPlayer();
+            bulletsound->setAudioOutput(bulletoutput);
+            bulletsound->setSource(QUrl("qrc:/sound/resources/chicken.mp3"));
+            bulletsound->play();
+            //End sound
+            //Increase Score
+            ptr_player->scorevalue += 1;
             return;
         }
     }
