@@ -3,6 +3,7 @@
 #include <QPixmap>
 #include <QGraphicsPixmapItem>
 #include <QTimer>
+#include "enemy.h"
 
 
 Laser::Laser(){
@@ -17,7 +18,17 @@ Laser::Laser(){
 void Laser:: move()
 {
 
-
+    QList<QGraphicsItem *> colliding_items =collidingItems();
+    for(int i=0, n=colliding_items.size(); i<n; ++i){
+        if(typeid(*(colliding_items[i]))==typeid(Enemy)){
+            scene()->removeItem(colliding_items[i]);
+            scene()->removeItem(this);
+            delete colliding_items[i];
+            delete this;
+            //Increase Score?
+            return;
+        }
+    }
 
     // *******  Moving the bullets upward ********
     setPos(x(),y()-10);

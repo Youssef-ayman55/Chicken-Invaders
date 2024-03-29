@@ -6,6 +6,7 @@
 #include <QPixmap>
 #include <QApplication>
 #include <QTimer>
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -25,7 +26,7 @@ void MainWindow::on_new_game_clicked()
     view = new QGraphicsView;
     scene = new QGraphicsScene;
     player_image = new QPixmap(":/images/resources/player.png");
-    plane = new player;
+    plane = new player(this, view);
     view->setFixedSize(1200,800);
     scene->setSceneRect(0,0,1200,800);
     view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
