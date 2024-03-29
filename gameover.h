@@ -15,9 +15,10 @@ class GameOver : public QDialog
     Q_OBJECT
 
 public:
-    explicit GameOver(QWidget *parent = nullptr, QString = "");
+    explicit GameOver(QWidget *parent = nullptr, QString = "", QWidget * w = NULL);
     ~GameOver();
     QString score;
+    QWidget * w;
 
 private slots:
     void on_TryAgain_clicked();

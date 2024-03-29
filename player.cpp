@@ -77,10 +77,9 @@ void player::systemUpdater(){
             scene()->removeItem(colliding_items[i]);
             decreaseHealth();
             if(health == 0){
-                GameOver* gameover = new GameOver(NULL, QString::number(scorevalue));
+                GameOver* gameover = new GameOver(NULL, QString::number(scorevalue), w);
                 gameover->show();
                 delete view;
-                delete w;
                 delete this;
                 return;
             }
@@ -92,10 +91,9 @@ void player::systemUpdater(){
         }
     }
     if(health == 0){
-        GameOver* gameover = new GameOver(NULL, QString::number(scorevalue));
+        GameOver* gameover = new GameOver(NULL, QString::number(scorevalue), w);
         gameover->show();
         delete view;
-        delete w;
         delete this;
         return;
     }
